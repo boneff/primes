@@ -1,15 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: boneff
- * Date: 3/13/18
- * Time: 10:52 PM
- */
 
 namespace Prime\Test\Controllers;
 
+use PHPUnit\Framework\TestCase;
+use Primes\Controllers\PrimeController;
+use Primes\Validators\PrimeValidator;
 
-class PrimeControllerTest extends \PHPUnit_Framework_TestCase
+class PrimeControllerTest extends TestCase
 {
+    public function testConstruct()
+    {
+        $mockValidator = $this->createMock(PrimeValidator::class);
 
+        $primeController = new PrimeController($mockValidator);
+        $this->assertInstanceOf(PrimeController::class, $primeController);
+    }
 }

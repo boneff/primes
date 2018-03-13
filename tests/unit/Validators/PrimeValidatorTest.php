@@ -1,15 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: boneff
- * Date: 3/13/18
- * Time: 10:53 PM
- */
 
 namespace Prime\Test\Validators;
 
+use PHPUnit\Framework\TestCase;
+use Primes\Validators\PrimeValidator;
 
-class PrimeValidatorTest extends \PHPUnit_Framework_TestCase
+class PrimeValidatorTest extends TestCase
 {
+    public function testIsPrime()
+    {
+        $validator = new PrimeValidator();
 
+        $this->assertTrue($validator->isPrime(2));
+    }
 }
