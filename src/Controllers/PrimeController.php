@@ -44,16 +44,21 @@ class PrimeController
     {
         // enumerable class maybe - and probably keep primes as value object
         // also could extract primesArray ($this->primes) in a separate class
-        // print columns as well
+        // maybe create a class MultiplicationTable
         $primesCount = count($this->primes);
         if (count($primesCount) > 0) {
+            echo " ";
             for ($i=0; $i < $primesCount; $i ++) {
+                echo " " . $this->primes[$i];
+            }
+            echo "\n";
+            for ($i=0; $i < $primesCount; $i ++) {
+                echo $this->primes[$i] . " ";
                 for ($j=0; $j < $primesCount; $j ++) {
                     echo $this->primes[$i] * $this->primes[$j] . " ";
                 }
                 echo "\n";
             }
         }
-
     }
 }
