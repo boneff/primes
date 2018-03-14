@@ -2,26 +2,22 @@
 
 namespace Primes\Controllers;
 
+use Primes\Models\MultiplicationTableModel;
 use Primes\Validators\PrimeValidator;
 
-class PrimeController
+class PrimeController extends BaseController
 {
     private $validator;
 
+    private $multiplicationTable;
+
     private $primes;
 
-    public function __construct(PrimeValidator $validator)
-    {
-        $this->setValidator($validator);
-        $this->primes = [];
-    }
-
-    /**
-     * @param PrimeValidator $validator
-     */
-    public function setValidator($validator)
+    public function __construct(PrimeValidator $validator, MultiplicationTableModel $multiplicationTable)
     {
         $this->validator = $validator;
+        $this->multiplicationTable = $multiplicationTable;
+        $this->primes = [];
     }
 
     public function generatePrimesAction(int $startNumber, int $numberOfPrimes)
@@ -37,28 +33,6 @@ class PrimeController
             $currentNumber++;
         }
 
-        return $this->primes;
-    }
-
-    public function displayPrimesMultiplicationTable()
-    {
-        // enumerable class maybe - and probably keep primes as value object
-        // also could extract primesArray ($this->primes) in a separate class
-        // maybe create a class MultiplicationTable
-        $primesCount = count($this->primes);
-        if (count($primesCount) > 0) {
-            echo " ";
-            for ($i=0; $i < $primesCount; $i ++) {
-                echo " " . $this->primes[$i];
-            }
-            echo "\n";
-            for ($i=0; $i < $primesCount; $i ++) {
-                echo $this->primes[$i] . " ";
-                for ($j=0; $j < $primesCount; $j ++) {
-                    echo $this->primes[$i] * $this->primes[$j] . " ";
-                }
-                echo "\n";
-            }
-        }
+        return $this->multiplicationTable->getMultiplicationTable($this->primes);
     }
 }

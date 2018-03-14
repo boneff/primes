@@ -8,13 +8,13 @@
 // Unit tests !!!
 // GrumPHP - php vendor/bin/grumphp run
 // https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-
+// enumerable class maybe - and probably keep primes as value object
+// also could extract primesArray ($this->primes) in a separate class
+// maybe create a class MultiplicationTable
+// fwrite(STDOUT, $primes);
 
     $validator = new \Primes\Validators\PrimeValidator();
-    $controller = new \Primes\Controllers\PrimeController($validator);
+    $model = new \Primes\Models\MultiplicationTableModel();
+    $controller = new \Primes\Controllers\PrimeController($validator, $model);
 
-    $primes = $controller->generatePrimesAction(1, 3);
-    print_r($primes);
-
-    $controller->displayPrimesMultiplicationTable();
-    //fwrite(STDOUT, $primes);
+    echo $controller->generatePrimesAction(1, 10);
