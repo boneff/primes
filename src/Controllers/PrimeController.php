@@ -21,7 +21,7 @@ class PrimeController
         $this->validator = $validator;
     }
 
-    public function generatePrimes(int $startNumber, int $numberOfPrimes)
+    public function generatePrimesAction(int $startNumber, int $numberOfPrimes)
     {
         $primes = [];
         $currentNumber = $startNumber;

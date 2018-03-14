@@ -13,6 +13,6 @@
 $validator = new \Primes\Validators\PrimeValidator();
 $controller = new \Primes\Controllers\PrimeController($validator);
 
-$primes = $controller->generatePrimes(1, 10);
+$primes = $controller->generatePrimesAction(1, 10);
 print_r($primes);
 //fwrite(STDOUT, $primes);
