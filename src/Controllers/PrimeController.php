@@ -10,7 +10,7 @@ class PrimeController
 
     public function __construct(PrimeValidator $validator)
     {
-        $this->validator = $this->setValidator($validator);
+        $this->setValidator($validator);
     }
 
     /**

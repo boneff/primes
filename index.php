@@ -10,9 +10,9 @@
 // https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 
 
-$validator = new \Primes\Validators\PrimeValidator();
-$controller = new \Primes\Controllers\PrimeController($validator);
+    $validator = new \Primes\Validators\PrimeValidator();
+    $controller = new \Primes\Controllers\PrimeController($validator);
 
-$primes = $controller->generatePrimesAction(1, 10);
-print_r($primes);
-//fwrite(STDOUT, $primes);
+    $primes = $controller->generatePrimesAction(1, 10);
+    print_r($primes);
+    //fwrite(STDOUT, $primes);
