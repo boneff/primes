@@ -11,7 +11,8 @@
     "require": {
         "ocramius/proxy-manager": "^2.1",
         "nikic/php-parser": "^4.0",
-        "friendsofphp/php-cs-fixer": "^2.10"
+        "friendsofphp/php-cs-fixer": "^2.10",
+        "symfony/console": "^4.0"
     },
     "require-dev": {
         "phpro/grumphp": "^0.14.0",

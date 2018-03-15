@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: boneff
- * Date: 15.03.18
- * Time: 09:46
- */
 
 namespace Primes\Output;
 
 use Primes\Output\OutputInterface;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Output\ConsoleOutput as SymfonyConsoleOutput;
 
 class ConsoleOutput implements OutputInterface
 {
@@ -19,28 +15,47 @@ class ConsoleOutput implements OutputInterface
         $this->output = '';
     }
 
-    public function format($input)
+    public function render($input)
     {
-        $numbersCount = count($input) - 1;
-        if (count($numbersCount) > 0) {
-            $this->output .= $input[0][0] . " ";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->output .= $input[0][$i + 1] . " ";
-            }
-            $this->output .= "\n";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->output .= $input[$i + 1][0] . " ";
-                for ($j=0; $j < $numbersCount; $j ++) {
-                    $this->output .= $input[$i + 1][$j +1] . " ";
-                }
-                $this->output .= "\n";
-            }
-        }
-        return $this->output;
+        $tableData = $this->prepareOutputForTable($input);
+
+        $consoleOutput = new SymfonyConsoleOutput();
+        $this->output = new Table($consoleOutput);
+        $this->output
+            ->setHeaders($tableData['headers'])
+            ->setRows($tableData['rows']);
+
+        $this->output->render();
     }
 
-    public function getOutput()
+    /**
+     * @param array $input
+     * @return array
+     */
+    private function prepareOutputForTable(array $input)
     {
-        fwrite(STDOUT, $this->output);
+        $headers = [];
+        $rows = [];
+
+        $numbersCount = count($input) - 1;
+        if (count($numbersCount) > 0) {
+            array_push($headers, $input[0][0]);
+            for ($i=0; $i < $numbersCount; $i ++) {
+                array_push($headers, $input[0][$i + 1]);
+            }
+            for ($i=0; $i < $numbersCount; $i ++) {
+                $currentRow = [];
+                array_push($currentRow, $input[$i + 1][0]);
+                for ($j=0; $j < $numbersCount; $j ++) {
+                    array_push($currentRow, $input[$i + 1][$j +1]);
+                }
+                array_push($rows, $currentRow);
+            }
+        }
+
+        return [
+            'headers' => $headers,
+            'rows' => $rows
+        ];
     }
 }

@@ -4,6 +4,5 @@ namespace Primes\Output;
 
 interface OutputInterface
 {
-    public function format($input);
-    public function getOutput();
+    public function render($input);
 }

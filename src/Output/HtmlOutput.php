@@ -13,7 +13,7 @@ class HtmlOutput implements OutputInterface
         $this->output = '';
     }
 
-    public function format($input)
+    public function render($input)
     {
         $this->output .= "<table><tr>";
         $numbersCount = count($input) - 1;
@@ -32,11 +32,6 @@ class HtmlOutput implements OutputInterface
             }
         }
         $this->output .= '</table>';
-        return $this->output;
-    }
-
-    public function getOutput()
-    {
         echo $this->output;
     }
 }
