@@ -15,6 +15,7 @@
     $validator = new \Primes\Validators\PrimeValidator();
     $generator = new \Primes\Generators\PrimesGenerator($validator, \Primes\Config\Config::instance());
     $model = new \Primes\Models\MultiplicationTableModel($generator->generatePrimes());
-    $controller = new \Primes\Controllers\PrimeController($model);
+    $outputFormatter = new Primes\Output\ConsoleOutput();
+    $controller = new \Primes\Controllers\PrimeController($outputFormatter, $model);
 
     $controller->showAction();

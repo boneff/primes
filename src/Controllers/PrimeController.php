@@ -3,18 +3,29 @@
 namespace Primes\Controllers;
 
 use Primes\Models\MultiplicationTableModel;
+use Primes\Output\OutputInterface;
 
 class PrimeController
 {
+    /**
+     * @var MultiplicationTableModel
+     */
     private $model;
 
-    public function __construct(MultiplicationTableModel $model)
+    /**
+     * @var OutputInterface
+     */
+    private $output;
+
+    public function __construct(OutputInterface $output, MultiplicationTableModel $model)
     {
         $this->model = $model;
+        $this->output = $output;
     }
 
     public function showAction()
     {
-        fwrite(STDOUT, $this->model->display());
+        $this->output->format($this->model->getMultiplicationTableAsArray());
+        fwrite(STDOUT, $this->output->getOutput());
     }
 }

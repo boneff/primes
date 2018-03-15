@@ -20,26 +20,6 @@ class MultiplicationTableModel
         $this->multiplicationTableOutput = '';
     }
 
-    public function display()
-    {
-        $numbersCount = count($this->coordinates) - 1;
-        if (count($numbersCount) > 0) {
-            $this->multiplicationTableOutput .= $this->coordinates[0][0] . " ";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->multiplicationTableOutput .= $this->coordinates[0][$i + 1] . " ";
-            }
-            $this->multiplicationTableOutput .= "\n";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->multiplicationTableOutput .= $this->coordinates[$i + 1][0] . " ";
-                for ($j=0; $j < $numbersCount; $j ++) {
-                    $this->multiplicationTableOutput .= $this->coordinates[$i + 1][$j +1] . " ";
-                }
-                $this->multiplicationTableOutput .= "\n";
-            }
-        }
-        return $this->multiplicationTableOutput;
-    }
-
     /**
      * @return mixed
      */
