@@ -41,6 +41,6 @@ class ConsoleOutput implements OutputInterface
 
     public function getOutput()
     {
-        return $this->output;
+        fwrite(STDOUT, $this->output);
     }
 }

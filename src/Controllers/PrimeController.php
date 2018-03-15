@@ -26,6 +26,6 @@ class PrimeController
     public function showAction()
     {
         $this->output->format($this->model->getMultiplicationTableAsArray());
-        fwrite(STDOUT, $this->output->getOutput());
+        $this->output->getOutput();
     }
 }

@@ -15,28 +15,28 @@ class HtmlOutput implements OutputInterface
 
     public function format($input)
     {
-        $this->output = "<table><tr>";
+        $this->output .= "<table><tr>";
         $numbersCount = count($input) - 1;
         if (count($numbersCount) > 0) {
             $this->output .= "<th>" . $input[0][0] . "</th>";
             for ($i=0; $i < $numbersCount; $i ++) {
                 $this->output .= "<th>" . $input[0][$i + 1] . "</th>";
             }
-            $this->output .= "</tr>";
+            $this->output .= "</tr><tr>";
             for ($i=0; $i < $numbersCount; $i ++) {
-                $this->output .= $input[$i + 1][0] . " ";
+                $this->output .= "<th>" . $input[$i + 1][0] . "</th>";
                 for ($j=0; $j < $numbersCount; $j ++) {
-                    $this->output .= $input[$i + 1][$j +1] . " ";
+                    $this->output .= "<td>" . $input[$i + 1][$j +1] . "</td>";
                 }
-                $this->output .= "\n";
+                $this->output .= "</tr>";
             }
         }
-        $this->output = '</table>';
+        $this->output .= '</table>';
         return $this->output;
     }
 
     public function getOutput()
     {
-        return $this->output;
+        echo $this->output;
     }
 }
