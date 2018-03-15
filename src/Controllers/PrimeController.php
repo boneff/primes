@@ -3,36 +3,18 @@
 namespace Primes\Controllers;
 
 use Primes\Models\MultiplicationTableModel;
-use Primes\Validators\PrimeValidator;
 
-class PrimeController extends BaseController
+class PrimeController
 {
-    private $validator;
+    private $model;
 
-    private $multiplicationTable;
-
-    private $primes;
-
-    public function __construct(PrimeValidator $validator, MultiplicationTableModel $multiplicationTable)
+    public function __construct(MultiplicationTableModel $model)
     {
-        $this->validator = $validator;
-        $this->multiplicationTable = $multiplicationTable;
-        $this->primes = [];
+        $this->model = $model;
     }
 
-    public function generatePrimesAction(int $startNumber, int $numberOfPrimes)
+    public function showAction()
     {
-        $currentNumber = $startNumber;
-
-        while (count($this->primes) < $numberOfPrimes) {
-            $isPrime = $this->validator->isPrime($currentNumber);
-
-            if ($isPrime === true) {
-                array_push($this->primes, $currentNumber);
-            }
-            $currentNumber++;
-        }
-
-        return $this->multiplicationTable->getMultiplicationTable($this->primes);
+        fwrite(STDOUT, $this->model->display());
     }
 }

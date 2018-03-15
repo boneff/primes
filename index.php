@@ -1,7 +1,6 @@
 <?php
     require_once  __DIR__ . '/vendor/autoload.php';
 
-// config - a range of primes
 // primeGenerator - can receive an algorithm (sieve) of generation as a dependency
 // primeOutputter - handles primes output
 // primeMultiplicationOutputter - handles creation of multiplication table
@@ -14,7 +13,8 @@
 // fwrite(STDOUT, $primes);
 
     $validator = new \Primes\Validators\PrimeValidator();
-    $model = new \Primes\Models\MultiplicationTableModel();
-    $controller = new \Primes\Controllers\PrimeController($validator, $model);
+    $generator = new \Primes\Generators\PrimesGenerator($validator, \Primes\Config\Config::instance());
+    $model = new \Primes\Models\MultiplicationTableModel($generator->generatePrimes());
+    $controller = new \Primes\Controllers\PrimeController($model);
 
-    echo $controller->generatePrimesAction(1, 10);
+    $controller->showAction();
