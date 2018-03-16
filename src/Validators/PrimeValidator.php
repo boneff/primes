@@ -6,7 +6,7 @@ class PrimeValidator
 {
     public function isPrime(int $number)
     {
-        $decimals = range(2, 9);
+        $highestIntegralSquareRoot = floor(sqrt($number));
 
         if ($number == 2) {
             return true;
@@ -16,8 +16,8 @@ class PrimeValidator
             return false;
         }
 
-        foreach ($decimals as $divisor) {
-            if ($number % $divisor == 0 && $number !== $divisor) {
+        for ($divider = 3; $divider <= $highestIntegralSquareRoot; $divider++) {
+            if ($number % $divider == 0) {
                 return false;
             }
         }
