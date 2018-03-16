@@ -16,7 +16,7 @@ class MultiplicationTableModel
     public function __construct(array $numbers)
     {
         $this->numbers = $numbers;
-        $this->coordinates = $this->getMultiplicationTableAsArray();
+        $this->coordinates = [];
         $this->multiplicationTableOutput = '';
     }
 
