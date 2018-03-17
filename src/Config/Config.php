@@ -8,6 +8,7 @@ class Config
 
     private $numberOfPrimesToFind  = 10;
     private $startNumber = 1;
+
     /**
      *
      * @return self
@@ -18,10 +19,6 @@ class Config
             self::$instance = new self;
         }
         return self::$instance;
-    }
-
-    private function __construct()
-    {
     }
 
     /**

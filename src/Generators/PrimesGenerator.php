@@ -29,6 +29,9 @@ class PrimesGenerator
         $this->primes = [];
     }
 
+    /**
+     * @return array
+     */
     public function generatePrimes()
     {
         $currentNumber = $this->config->getStartNumber();

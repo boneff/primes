@@ -8,6 +8,9 @@ class HtmlOutput implements OutputInterface
 {
     private $output;
 
+    /**
+     * HtmlOutput constructor.
+     */
     public function __construct()
     {
         $this->output = '';
