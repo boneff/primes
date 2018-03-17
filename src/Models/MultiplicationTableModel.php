@@ -13,7 +13,7 @@ class MultiplicationTableModel
 
     private $numbers;
 
-    public function __construct(array $numbers)
+    public function __construct(array $numbers = [])
     {
         $this->numbers = $numbers;
         $this->coordinates = [];
@@ -21,12 +21,12 @@ class MultiplicationTableModel
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getMultiplicationTableAsArray()
+    private function calculate()
     {
         $numbersCount = count($this->numbers);
-        if (count($numbersCount) > 0) {
+        if ($numbersCount > 0) {
             $this->coordinates[0][0] = " ";
             for ($i=0; $i < $numbersCount; $i ++) {
                 $this->coordinates[0][$i + 1] = $this->numbers[$i];
@@ -37,6 +37,18 @@ class MultiplicationTableModel
                     $this->coordinates[$i + 1][$j + 1] = $this->numbers[$i] * $this->numbers[$j];
                 }
             }
+        }
+
+        return $this->coordinates;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTableAsArray()
+    {
+        if (count($this->coordinates) == 0) {
+            return $this->calculate();
         }
 
         return $this->coordinates;

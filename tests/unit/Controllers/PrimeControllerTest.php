@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Primes\Controllers\PrimeController;
 use Primes\Models\MultiplicationTableModel;
 use Primes\Output\ConsoleOutput;
+use Primes\Output\HtmlOutput;
 use Primes\Output\OutputInterface;
 
 class PrimeControllerTest extends TestCase
