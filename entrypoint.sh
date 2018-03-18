@@ -2,10 +2,11 @@
 
 apt-get update && apt-get install wget git-core zip unzip --yes
 
+#download composer installer
 EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
-
+#check signature of download
 if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
 then
     >&2 echo 'ERROR: Invalid installer signature'

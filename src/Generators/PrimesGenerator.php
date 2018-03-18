@@ -22,6 +22,11 @@ class PrimesGenerator
      */
     private $primes;
 
+    /**
+     * PrimesGenerator constructor.
+     * @param PrimeValidator $validator
+     * @param Config $config
+     */
     public function __construct(PrimeValidator $validator, Config $config)
     {
         $this->validator = $validator;
@@ -30,6 +35,7 @@ class PrimesGenerator
     }
 
     /**
+     * Generates prime numbers in a range and returns them as array
      * @return array
      */
     public function generatePrimes()

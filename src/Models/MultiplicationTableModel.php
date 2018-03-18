@@ -4,14 +4,32 @@ namespace Primes\Models;
 
 class MultiplicationTableModel
 {
+    /**
+     * @var array
+     */
     private $coordinates;
 
+    /**
+     * @var array
+     */
     private $numbers;
 
+    /**
+     * @var array
+     */
     private $header;
 
+    /**
+     * Array of arrays with multiplication results
+     *
+     * @var array
+     */
     private $body;
 
+    /**
+     * MultiplicationTableModel constructor - accept an array of numbers to build a multiplication table.
+     * @param array $numbers
+     */
     public function __construct(array $numbers = [])
     {
         $this->numbers = $numbers;
@@ -21,6 +39,8 @@ class MultiplicationTableModel
     }
 
     /**
+     * Calculates multiplication table
+     *
      * @return array
      */
     private function calculateMultiplication()
@@ -34,6 +54,9 @@ class MultiplicationTableModel
                 $this->addHeader($this->coordinates[0][$i + 1]);
             }
             for ($i=0; $i < $numbersCount; $i ++) {
+                if (!is_int($this->numbers[$i])) {
+                    throw new \InvalidArgumentException('Pass only integers to multiplication table calculator');
+                }
                 $currentRow = [];
                 $this->coordinates[$i + 1][0] = $this->numbers[$i];
                 array_push($currentRow, $this->coordinates[$i + 1][0]);
@@ -49,6 +72,8 @@ class MultiplicationTableModel
     }
 
     /**
+     * Returns multiplication table
+     *
      * @return array
      */
     public function calculate()
@@ -94,8 +119,13 @@ class MultiplicationTableModel
         return $this->coordinates;
     }
 
+    /**
+     * @param int $x
+     * @param int $y
+     * @return int
+     */
     public function getCoordinate(int $x, int $y)
     {
-        return $this->coordinates[$x][$y] ?? '';
+        return $this->coordinates[$x][$y] ?? 0;
     }
 }

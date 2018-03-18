@@ -52,8 +52,27 @@ class MultiplicationTableModelTest extends TestCase
     public function testMultiplicationTableHeaderAndBody()
     {
         $multiplicationTable = new MultiplicationTableModel([2, 3, 5, 7]);
+        $multiplicationTable->calculate();
 
         $this->assertInternalType('array', $multiplicationTable->getHeader());
         $this->assertInternalType('array', $multiplicationTable->getBody());
+        $this->assertCount(5, $multiplicationTable->getHeader());
+        $this->assertCount(4, $multiplicationTable->getBody());
+    }
+
+    public function testMultiplicationTableCoordinateGetter()
+    {
+        $multiplicationTable = new MultiplicationTableModel([2, 3]);
+        $multiplicationTable->calculate();
+
+        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
+    }
+
+    public function testMultiplicationTableWithStringInput()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $multiplicationTable = new MultiplicationTableModel(['a', 'b', 'c']);
+        $multiplicationTable->calculate();
     }
 }
