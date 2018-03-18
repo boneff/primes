@@ -25,4 +25,5 @@ chmod a+x /bin/composer
 export PATH="$PATH:/bin/composer"
 #install project dependencies
 composer install
+chown www-data:www-data -R vendor/
 exit $RESULT

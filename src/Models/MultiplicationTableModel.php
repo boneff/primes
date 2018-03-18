@@ -7,11 +7,6 @@ class MultiplicationTableModel
     /**
      * @var array
      */
-    private $coordinates;
-
-    /**
-     * @var array
-     */
     private $numbers;
 
     /**
@@ -33,36 +28,31 @@ class MultiplicationTableModel
     public function __construct(array $numbers = [])
     {
         $this->numbers = $numbers;
-        $this->coordinates = [];
         $this->header = [];
         $this->body = [];
     }
 
     /**
      * Calculates multiplication table
-     *
-     * @return array
+     * @return $this
      */
     private function calculateMultiplication()
     {
         $numbersCount = count($this->numbers);
         if ($numbersCount > 0) {
-            $this->coordinates[0][0] = " ";
-            $this->addHeader($this->coordinates[0][0]);
+            $this->addHeader('');
             for ($i=0; $i < $numbersCount; $i ++) {
-                $this->coordinates[0][$i + 1] = $this->numbers[$i];
-                $this->addHeader($this->coordinates[0][$i + 1]);
+                $this->addHeader($this->numbers[$i]);
             }
             for ($i=0; $i < $numbersCount; $i ++) {
                 if (!is_int($this->numbers[$i])) {
                     throw new \InvalidArgumentException('Pass only integers to multiplication table calculator');
                 }
                 $currentRow = [];
-                $this->coordinates[$i + 1][0] = $this->numbers[$i];
-                array_push($currentRow, $this->coordinates[$i + 1][0]);
+                array_push($currentRow, $this->numbers[$i]);
                 for ($j=0; $j < $numbersCount; $j ++) {
-                    $this->coordinates[$i + 1][$j + 1] = $this->numbers[$i] * $this->numbers[$j];
-                    array_push($currentRow, $this->coordinates[$i + 1][$j + 1]);
+                    $multiplication = $this->numbers[$i] * $this->numbers[$j];
+                    array_push($currentRow, $multiplication);
                 }
                 $this->addRow($currentRow);
             }
@@ -73,12 +63,11 @@ class MultiplicationTableModel
 
     /**
      * Returns multiplication table
-     *
-     * @return array
+     * @return $this|MultiplicationTableModel
      */
     public function calculate()
     {
-        if (count($this->coordinates) == 0) {
+        if (count($this->getBody()) == 0) {
             return $this->calculateMultiplication();
         }
 
@@ -112,20 +101,12 @@ class MultiplicationTableModel
     }
 
     /**
-     * @return array
-     */
-    public function getCoordinates()
-    {
-        return $this->coordinates;
-    }
-
-    /**
      * @param int $x
      * @param int $y
      * @return int
      */
-    public function getCoordinate(int $x, int $y)
+    public function getBodyValue(int $x, int $y)
     {
-        return $this->coordinates[$x][$y] ?? 0;
+        return $this->body[$x][$y] ?? 0;
     }
 }

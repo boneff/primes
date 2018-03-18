@@ -6,8 +6,8 @@ services:
     image: php:7.1-cli
     restart: unless-stopped
     volumes:
-      - /home/boneff/PhpstormProjects/primes:/var/www/html
-    working_dir: /var/www/html
+      - /var/www/html/primes:/var/www/html/primes
+    working_dir: /var/www/html/primes
     stdin_open: true
     tty: true
     entrypoint: ./entrypoint.sh

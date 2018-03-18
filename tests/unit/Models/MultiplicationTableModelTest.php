@@ -34,7 +34,7 @@ class MultiplicationTableModelTest extends TestCase
         $multiplicationTable = new MultiplicationTableModel([2]);
         $multiplicationTable->calculate();
 
-        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
+        $this->assertEquals(4, $multiplicationTable->getBodyValue(0, 1));
     }
 
     public function testMultiplicationTableWithMultipleMultipliers()
@@ -42,11 +42,11 @@ class MultiplicationTableModelTest extends TestCase
         $multiplicationTable = new MultiplicationTableModel([2, 3, 5, 7]);
         $multiplicationTable->calculate();
 
-        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
-        $this->assertEquals(9, $multiplicationTable->getCoordinate(2, 2));
-        $this->assertEquals(25, $multiplicationTable->getCoordinate(3, 3));
-        $this->assertEquals(14, $multiplicationTable->getCoordinate(1, 4));
-        $this->assertEquals(21, $multiplicationTable->getCoordinate(2, 4));
+        $this->assertEquals(4, $multiplicationTable->getBodyValue(0, 1));
+        $this->assertEquals(9, $multiplicationTable->getBodyValue(1, 2));
+        $this->assertEquals(25, $multiplicationTable->getBodyValue(2, 3));
+        $this->assertEquals(14, $multiplicationTable->getBodyValue(0, 4));
+        $this->assertEquals(21, $multiplicationTable->getBodyValue(1, 4));
     }
 
     public function testMultiplicationTableHeaderAndBody()
@@ -58,14 +58,6 @@ class MultiplicationTableModelTest extends TestCase
         $this->assertInternalType('array', $multiplicationTable->getBody());
         $this->assertCount(5, $multiplicationTable->getHeader());
         $this->assertCount(4, $multiplicationTable->getBody());
-    }
-
-    public function testMultiplicationTableCoordinateGetter()
-    {
-        $multiplicationTable = new MultiplicationTableModel([2, 3]);
-        $multiplicationTable->calculate();
-
-        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
     }
 
     public function testMultiplicationTableWithStringInput()
