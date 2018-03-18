@@ -11,41 +11,49 @@ class MultiplicationTableModelTest extends TestCase
     {
         $multiplicationTable = new MultiplicationTableModel([2, 3, 4]);
 
-        $this->assertInternalType('array', $multiplicationTable->getTableAsArray());
+        $this->assertInstanceOf(MultiplicationTableModel::class, $multiplicationTable->calculate());
     }
 
     public function testMultiplicationTableReturnsEmptyArray()
     {
         $multiplicationTable = new MultiplicationTableModel([]);
 
-        $this->assertCount(0, $multiplicationTable->getTableAsArray());
+        $this->assertCount(0, $multiplicationTable->getBody());
     }
 
     public function testMultiplicationTableWithOneNumber()
     {
         $multiplicationTable = new MultiplicationTableModel([2]);
+        $multiplicationTable->calculate();
 
-        $this->assertGreaterThan(0, $multiplicationTable->getTableAsArray());
+        $this->assertGreaterThan(0, $multiplicationTable->getBody());
     }
 
     public function testMultiplicationTableWithSingleMultiplier()
     {
         $multiplicationTable = new MultiplicationTableModel([2]);
-        $multiplicationTableArray = $multiplicationTable->getTableAsArray();
+        $multiplicationTable->calculate();
 
-        $this->assertEquals(4, $multiplicationTableArray[1][1]);
+        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
     }
 
     public function testMultiplicationTableWithMultipleMultipliers()
     {
         $multiplicationTable = new MultiplicationTableModel([2, 3, 5, 7]);
-        $multiplicationTableArray = $multiplicationTable->getTableAsArray();
+        $multiplicationTable->calculate();
 
-        $this->assertEquals(4, $multiplicationTableArray[1][1]);
-        $this->assertEquals(9, $multiplicationTableArray[2][2]);
-        $this->assertEquals(25, $multiplicationTableArray[3][3]);
-        $this->assertEquals(49, $multiplicationTableArray[4][4]);
-        $this->assertEquals(14, $multiplicationTableArray[1][4]);
-        $this->assertEquals(21, $multiplicationTableArray[2][4]);
+        $this->assertEquals(4, $multiplicationTable->getCoordinate(1, 1));
+        $this->assertEquals(9, $multiplicationTable->getCoordinate(2, 2));
+        $this->assertEquals(25, $multiplicationTable->getCoordinate(3, 3));
+        $this->assertEquals(14, $multiplicationTable->getCoordinate(1, 4));
+        $this->assertEquals(21, $multiplicationTable->getCoordinate(2, 4));
+    }
+
+    public function testMultiplicationTableHeaderAndBody()
+    {
+        $multiplicationTable = new MultiplicationTableModel([2, 3, 5, 7]);
+
+        $this->assertInternalType('array', $multiplicationTable->getHeader());
+        $this->assertInternalType('array', $multiplicationTable->getBody());
     }
 }

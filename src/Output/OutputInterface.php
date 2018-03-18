@@ -2,11 +2,13 @@
 
 namespace Primes\Output;
 
+use Primes\Models\MultiplicationTableModel;
+
 interface OutputInterface
 {
     /**
      * @param $input
      * @return mixed
      */
-    public function render($input);
+    public function render(MultiplicationTableModel $input);
 }

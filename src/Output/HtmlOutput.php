@@ -2,6 +2,7 @@
 
 namespace Primes\Output;
 
+use Primes\Models\MultiplicationTableModel;
 use Primes\Output\OutputInterface;
 
 class HtmlOutput implements OutputInterface
@@ -16,25 +17,27 @@ class HtmlOutput implements OutputInterface
         $this->output = '';
     }
 
-    public function render($input)
+    public function render(MultiplicationTableModel $table)
     {
-        $this->output .= "<table><tr>";
-        $numbersCount = count($input) - 1;
-        if (count($numbersCount) > 0) {
-            $this->output .= "<th>" . $input[0][0] . "</th>";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->output .= "<th>" . $input[0][$i + 1] . "</th>";
-            }
-            $this->output .= "</tr><tr>";
-            for ($i=0; $i < $numbersCount; $i ++) {
-                $this->output .= "<th>" . $input[$i + 1][0] . "</th>";
-                for ($j=0; $j < $numbersCount; $j ++) {
-                    $this->output .= "<td>" . $input[$i + 1][$j +1] . "</td>";
-                }
-                $this->output .= "</tr>";
-            }
+        $this->output .= "<table>";
+
+        $this->output .= "<tr>";
+        foreach ($table->getHeader() as $header) {
+            $this->output .= "<th>" . $header . "</th>";
         }
-        $this->output .= '</table>';
+        $this->output .= "</tr>";
+
+
+        foreach ($table->getBody() as $row) {
+            $this->output .= "<tr>";
+            foreach ($row as $data) {
+                $this->output .= "<td>" . $data . "</td>";
+            }
+            $this->output .= "</tr>";
+        }
+
+        $this->output .= "</table>";
+
         echo $this->output;
     }
 }
