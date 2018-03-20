@@ -1,10 +1,11 @@
 <?php
     require_once  __DIR__ . '/vendor/autoload.php';
 
-    $validator = new \Primes\Validators\PrimeValidator();
-    $generator = new \Primes\Generators\PrimesGenerator($validator, \Primes\Config\Config::instance());
-    $primesArray = $generator->generatePrimes();
-    $model = new \Primes\Models\MultiplicationTableModel($primesArray);
+    $generatorType = (isset($argv[1])) ? $argv[1] : 'primes';
+
+    $generator = \Primes\Generators\GeneratorFactory::make($generatorType);
+    $numbersArray = $generator->generate(10);
+    $model = new \Primes\Models\MultiplicationTableModel($numbersArray);
     $outputFormatter = new Primes\Output\ConsoleOutput();
     $controller = new \Primes\Controllers\PrimeController($outputFormatter, $model);
 

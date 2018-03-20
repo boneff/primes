@@ -5,7 +5,7 @@ namespace Primes\Generators;
 use Primes\Config\Config;
 use Primes\Validators\PrimeValidator;
 
-class PrimesGenerator
+class PrimesGenerator implements GeneratorInterface
 {
     /**
      * @var PrimeValidator
@@ -38,7 +38,7 @@ class PrimesGenerator
      * Generates prime numbers in a range and returns them as array
      * @return array
      */
-    public function generatePrimes()
+    public function generate($limit = 10)
     {
         $currentNumber = $this->config->getStartNumber();
         $numberOfPrimesToFind = $this->config->getNumberOfPrimesToFind();

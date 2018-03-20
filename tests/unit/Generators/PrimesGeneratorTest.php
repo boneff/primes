@@ -26,7 +26,7 @@ class PrimesGeneratorTest extends TestCase
         $validator = new PrimeValidator();
         $generator = new PrimesGenerator($validator, $configMock);
 
-        $this->assertCount(10, $generator->generatePrimes());
+        $this->assertCount(10, $generator->generate());
     }
 
     public function testGeneratorWithStartNumberZero()
@@ -46,7 +46,7 @@ class PrimesGeneratorTest extends TestCase
         $validator = new PrimeValidator();
         $generator = new PrimesGenerator($validator, $configMock);
 
-        $this->assertCount(10, $generator->generatePrimes());
+        $this->assertCount(10, $generator->generate());
     }
 
     public function testGeneratorWithNegativePrimesLimit()
@@ -67,7 +67,7 @@ class PrimesGeneratorTest extends TestCase
         $validator = new PrimeValidator();
         $generator = new PrimesGenerator($validator, $configMock);
 
-        $this->assertCount(0, $generator->generatePrimes());
+        $this->assertCount(0, $generator->generate());
     }
 
     public function testGeneratorWithLargerNumberToFind()
@@ -87,6 +87,6 @@ class PrimesGeneratorTest extends TestCase
         $validator = new PrimeValidator();
         $generator = new PrimesGenerator($validator, $configMock);
 
-        $this->assertCount(10000, $generator->generatePrimes());
+        $this->assertCount(10000, $generator->generate());
     }
 }
